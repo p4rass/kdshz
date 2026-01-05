@@ -88,11 +88,15 @@ PASSAGE:
 """
 
     result = subprocess.run(
-        ["ollama", "run", "mistral"],
+        ["ollama", "run", "phi3"],
         input=prompt,
+        capture_output=True,
         text=True,
-        capture_output=True
+        encoding="utf-8",
+        errors="ignore",   # 👈 THIS LINE
+        timeout=60
     )
+
 
     output = result.stdout.strip().upper()
 
@@ -133,4 +137,5 @@ def verify_claim(claim, passage):
         return "CONTRADICT"
 
     return "NEUTRAL"
+
 '''
